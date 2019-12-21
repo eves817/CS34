@@ -1,0 +1,12 @@
+﻿
+@{
+    ViewBag.Title = "Chart";
+}
+
+@{ 
+    var myChart = new Chart(width: 600, height: 400)
+        .AddTitle("BuBu年齡與體重對照圖")
+        .AddSeries(chartType: "Bar", xValue: new[] { "1月", "2月", "3月", "4月", "5月" }, yValues: new[] { "3", "4", "4.5", "5", "5.5" }).Write();
+}
+
+

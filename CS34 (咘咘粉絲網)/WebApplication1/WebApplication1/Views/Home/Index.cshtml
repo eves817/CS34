@@ -1,0 +1,67 @@
+﻿@{
+    var imagePath = "";
+    var dataFile = Server.MapPath("~/App_Data/bubu.txt");
+    Array userData = File.ReadAllLines(dataFile);
+
+    string[] Advertisement = {"星星","太陽","月亮"};
+    if (Request["Choice"] != null)
+    { imagePath = "/Images/" + Request["Choice"]; }
+}
+
+@{ 
+<h4> 咘咘網站</h4>
+    foreach(var X in Advertisement)
+    { @X <text>&nbsp;&nbsp;&nbsp;&nbsp;</text> }
+}
+<h3>@Html.ActionLink("看BuBu成長圖","Chart","Home") </h3>
+    <h4> 加入粉絲團 </h4>
+    @{
+        if (IsPost)
+        {
+            string YourName = Request["YourName"];
+            string YourPhone = Request["YourPhone"];
+            string FM = Request["FM"];
+            <p>
+                歡迎 @YourName @FM (@YourPhone)加入
+            </p>
+            <form method="post" action="">
+                咘咘造型
+                <select name="Choice">
+                    <option value="bubu3.jpg"> 調皮型 </option>
+                    <option value="bubu4.jpg"> 淑女型 </option>
+                    <option value="bubu5.jpg"> 可愛型 </option>
+                    <option value="bubu6.jpg"> 萌萌型 </option>
+                </select>
+                <input type="submit" value="確定">
+                <p>
+                    <img src="@imagePath">
+                </p>
+
+            </form>
+        }
+        else
+        {
+            <form method="post" actions="">
+                名字:<br>
+                <input type="text" name="YourName" class="dataOne" value=""><br>
+                電話:<br><br>
+                <input type="text" name="YourPhone" class="dataOne" value=""><br><br>
+                性別:<br><br>
+               <select name="FM">
+                   <option value="小姐">F</option>
+                   <option value="先生">M</option>
+               </select>
+                <input type="submit" value="送出" class="submit">
+            </form>
+        }
+        <h3> 媽媽是超人 </h3>
+        foreach(string dataLine in userData)
+        {
+            @dataLine <br/>
+        }
+        <!--以下是測試區
+        <p>
+            圖片路徑:@imagePath
+        </p>
+            -->
+        }
